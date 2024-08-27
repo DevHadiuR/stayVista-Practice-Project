@@ -1,7 +1,5 @@
 # stayVista-starter-template
 
-- [Live Site](https://stayvista-live.web.app/)
-
 
 ### Packages and api docs used in this project:
 
