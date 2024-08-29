@@ -83,7 +83,11 @@ async function run() {
 
     // get api for all rooms
     app.get("/rooms", async (req, res) => {
-      const result = await allRooms.find().toArray();
+      const category = req.query.category;
+      let query = {};
+      if (category && category !== "null") query = { category };
+
+      const result = await allRooms.find(query).toArray();
       res.send(result);
     });
 
