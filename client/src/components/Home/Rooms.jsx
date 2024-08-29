@@ -4,15 +4,18 @@ import Heading from "../Shared/Heading";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure2 from "../../hooks/useAxiosSecure2";
+import { useSearchParams } from "react-router-dom";
 
 const Rooms = () => {
   const axiosSecure2 = useAxiosSecure2();
+  const [params, setParams] = useSearchParams();
+  const category = params.get("category");
 
   // Get the room data by tanstack query
   const { data: rooms = [], isLoading } = useQuery({
-    queryKey: ["rooms"],
+    queryKey: ["rooms", category],
     queryFn: async () => {
-      const { data } = await axiosSecure2("/rooms");
+      const { data } = await axiosSecure2(`/rooms?category=${category}`);
       return data;
     },
   });

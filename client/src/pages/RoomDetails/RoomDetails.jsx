@@ -2,7 +2,7 @@ import Container from "../../components/Shared/Container";
 import { Helmet } from "react-helmet-async";
 import RoomReservation from "../../components/RoomDetails/RoomReservation";
 import Heading from "../../components/Shared/Heading";
-import { useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
@@ -14,7 +14,7 @@ const RoomDetails = () => {
 
   // Get single room data
   const { data: room = [], isLoading } = useQuery({
-    queryKey: ["room"],
+    queryKey: ["room", id],
     queryFn: async () => {
       const { data } = await axiosCommon(`/rooms/${id}`);
       return data;
