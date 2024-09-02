@@ -8,6 +8,7 @@ import { useSearchParams } from "react-router-dom";
 
 const Rooms = () => {
   const axiosSecure2 = useAxiosSecure2();
+  // eslint-disable-next-line no-unused-vars
   const [params, setParams] = useSearchParams();
   const category = params.get("category");
 
