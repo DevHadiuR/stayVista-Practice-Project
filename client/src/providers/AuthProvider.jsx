@@ -41,11 +41,11 @@ const AuthProvider = ({ children }) => {
     return sendPasswordResetEmail(auth, email);
   };
 
-  const logOut = async () => {
+  const logOut = () => {
     setLoading(true);
-    await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
-      withCredentials: true,
-    });
+    // await axios.get(`${import.meta.env.VITE_URL}/logout`, {
+    //   withCredentials: true,
+    // });
     return signOut(auth);
   };
 
