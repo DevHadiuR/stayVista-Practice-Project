@@ -3,15 +3,17 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
+import { useState } from "react";
 
 const Login = () => {
   const auth = useAuth();
-  const { signInWithGoogle, signIn, loading, setLoading } = auth || {};
+  const { signInWithGoogle, signIn, loading, setLoading, resetPassword } =
+    auth || {};
   if (!auth) {
     console.log("useAuth returned null or undefined");
   }
-
   const navigate = useNavigate();
+  const [resetEmail, setResetEmail] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,6 +30,7 @@ const Login = () => {
       toast.success("Login Successfull!");
     } catch (error) {
       toast.error(error.message);
+      setLoading(false)
     }
   };
 
@@ -41,6 +44,20 @@ const Login = () => {
     } catch (error) {
       toast.error(error.message);
     }
+  };
+
+  // handle reset password
+  const handleResetPassword = async () => {
+    if (!resetEmail) return toast.error("Please enter a email first!");
+    try {
+      await resetPassword(resetEmail);
+      toast.success("Request success! Please check your email first...");
+      
+    } catch (error) {
+      toast.error(error.message);
+      setLoading(false)
+    }
+    
   };
 
   return (
@@ -62,6 +79,7 @@ const Login = () => {
                 Email address
               </label>
               <input
+                onBlur={(e) => setResetEmail(e.target.value)}
                 type="email"
                 name="email"
                 id="email"
@@ -103,7 +121,10 @@ const Login = () => {
           </div>
         </form>
         <div className="space-y-1">
-          <button className="text-xs hover:underline hover:text-rose-500 text-gray-400">
+          <button
+            onClick={handleResetPassword}
+            className="text-xs hover:underline hover:text-rose-500 text-gray-400"
+          >
             Forgot password?
           </button>
         </div>
