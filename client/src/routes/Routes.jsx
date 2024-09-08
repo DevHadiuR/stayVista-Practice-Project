@@ -7,6 +7,8 @@ import SignUp from "../pages/SignUp/SignUp";
 import RoomDetails from "../pages/RoomDetails/RoomDetails";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
+import Statistics from "../pages/Dashboard/common/Statistics";
+import AddRoom from "../pages/Dashboard/host/AddRoom";
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +33,20 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashboardLayout />,
-    children: [],
+    children: [
+      {
+        path: "statistics",
+        element: <Statistics />,
+      },
+      {
+        path: "add-room",
+        element: <AddRoom />,
+      },
+      {
+        path: "my-listings",
+        element: <AddRoom />,
+      },
+    ],
   },
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <SignUp /> },
