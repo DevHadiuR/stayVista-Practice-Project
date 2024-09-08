@@ -84,6 +84,7 @@ async function run() {
     // get api for all rooms
     app.get("/rooms", async (req, res) => {
       const category = req.query.category;
+      console.log(category)
       let query = {};
       if (category && category !== "null") query = { category };
 
